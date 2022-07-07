@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if select == "insert"%}
+    insert 
+    <form action="/" method="post">
+        <input type="text" name="insert_text" required>
+        <input type="hidden" name="sql_cmd" value="insert">
+        <input type="submit">
+    </form>
+{% elif select == "update"%}
+    update
+    <form action="/" method="post">
+        {% for post in posts%}
+            <input name="update_texts" value="{{post[1]}}" required><br>
+            <input type="hidden" name="update_id" value="{{post[0]}}">
+        {% endfor %}
+        <input type="hidden" name="sql_cmd" value="update">        
+        <input type="submit">
+    </form>
+{% elif select == "delete"%}
+    delete
+    <form action="/" method="post">
+        {% for post in posts%}
+            <input type="checkbox" name="delete_id" value="{{post[0]}}">
+            {{post[1]}}<br>
+        {% endfor %}
+        <input type="hidden" name="sql_cmd" value="delete">
+        <input type="submit">
+    </form>
+{% else %}
+<form action="/" method="get">
+    <button type="submit">Relode</button>
+    <button type="submit" name="select" value="insert">追加</button>
+    <button type="submit" name="select" value="update">修正</button>
+    <button type="submit" name="select" value="delete">削除</button>
+</form>
+{% endif %}
+<a href="/">return /</a>
+<br><br>
+
+##STORED DATE## <br>
+{% for post in posts%}
+    {{post[2]}} : {{post[1]}} <br>
+{% endfor %}
+
+{% endblock %}
+
