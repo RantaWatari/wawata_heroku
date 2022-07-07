@@ -1,3 +1,3 @@
 web: flask init-db
 web: flask run
-web: gunicorn flask_file:app --log-file=-
+web: gunicorn flask_file:'crate_app()' --log-file=-
