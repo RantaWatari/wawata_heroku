@@ -1,5 +1,4 @@
-from django import db
-from flask import render_template,request,Blueprint,g
+from flask import render_template,request,Blueprint
 from flask_file.db_control import show_db,get_db
 
 bp =Blueprint("server",__name__)

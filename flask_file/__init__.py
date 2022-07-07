@@ -1,4 +1,4 @@
-from flask import Flask,current_app
+from flask import Flask
 import os
 
 def create_app():
