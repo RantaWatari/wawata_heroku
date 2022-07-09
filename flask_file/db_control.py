@@ -1,12 +1,13 @@
-#import click
+import click
 import psycopg2
 from flask import g,current_app
-#from flask.cli import with_appcontext
+from flask.cli import with_appcontext
 
 
 def get_db():
     if "db" not in g:
-        g.db = psycopg2.connect(current_app.config["DATABASE"])
+        #g.db = psycopg2.connect(current_app.config["DATABASE"])
+        g.db = psycopg2.connect('postgres://ysbwuosrjdfhgh:8b051cb08b652e9001292338f20ef2f82d4199edc4e13acf9c5131679bb4f716@ec2-3-226-163-72.compute-1.amazonaws.com:5432/dvataoqaroqce')
     return g.db
     
 def show_db():
@@ -21,8 +22,8 @@ def close_db(e=None):
     if db is not None:
         db.close()
 
-#@click.command("init-db")
-#@with_appcontext
+@click.command("init-db")
+@with_appcontext
 def init_db():
     db = get_db()
     db.cursor().execute("set time zone 'asia/tokyo'")
