@@ -10,7 +10,7 @@ def create_app():
 
     from flask_file import db_control
     app.teardown_appcontext(db_control.close_db)
-    app.cli.add_command(db_control.init_db)
+    #app.cli.add_command(db_control.init_db)
     
     from flask_file import server
     app.register_blueprint(server.bp)
