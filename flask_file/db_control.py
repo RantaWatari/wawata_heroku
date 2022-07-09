@@ -1,7 +1,7 @@
-import click
+#import click
 import psycopg2
 from flask import g,current_app
-from flask.cli import with_appcontext
+#from flask.cli import with_appcontext
 
 
 def get_db():
@@ -21,8 +21,8 @@ def close_db(e=None):
     if db is not None:
         db.close()
 
-@click.command("init-db")
-@with_appcontext
+#@click.command("init-db")
+#@with_appcontext
 def init_db():
     db = get_db()
     db.cursor().execute("set time zone 'asia/tokyo'")
