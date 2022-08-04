@@ -1,2 +1,2 @@
-http://seikawatari.herokuapp.com
+http://wawata.herokuapp.com
 
