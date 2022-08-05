@@ -9,7 +9,7 @@ def get_db():
     if "db" not in g:
         g.db = psycopg2.connect(current_app.config["DATABASE"])
         g.db.cursor().execute("set time zone 'asia/tokyo'")
-        g.db.cursor().execute("CREATE TABLE IF NOT EXISTS text(id SERIAL PRIMARY KEY ,str TEXT, time TIMESTAMP(0) with time zone DEFAULT CURRENT_TIMESTAMP);")
+        g.db.cursor().execute("CREATE TABLE IF NOT EXISTS text(id SERIAL PRIMARY KEY ,str TEXT, time TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP);")
     return g.db
     
 def show_db():
