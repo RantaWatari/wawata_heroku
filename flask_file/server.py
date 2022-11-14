@@ -27,6 +27,7 @@ def index():
                 update_id = request.form.getlist("update_id")
                 for n in range(0,len(update_texts)):
                     db.cursor().execute("UPDATE text SET str = %s where id = %s",(update_texts[n],update_id[n]))
-
+                    # updateでtimestampを更新するときは、下記の方法とfuncotionで予め設定する方法の二つがある。22/10/15
+                    #db.cursor().execute("UPDATE text SET (time) = (CURRENT_TIMESTAMP) where id = %s",(update_id[n],))
         db.commit()
         return render_template("index.html",posts=show_db())
