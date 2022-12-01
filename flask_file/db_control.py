@@ -11,7 +11,7 @@ def get_db():
     
 def show_db():
     posts = get_db().cursor()
-    posts.execute("select * from text;")
+    posts.execute("select * from text order by id;")
     posts = posts.fetchall()
     return posts
 
