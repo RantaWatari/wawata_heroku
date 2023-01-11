@@ -2,6 +2,7 @@ import click
 import psycopg2
 from flask import g,current_app
 from flask.cli import with_appcontext
+import datetime
 
 
 def get_db():
@@ -13,11 +14,15 @@ def show_db():
     posts = get_db().cursor()
     posts.execute("select * from text order by id;")
     posts = posts.fetchall()
+    
+    print(datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))))
+    #DBのデータ確認用
+    #[print(posts[i]) for i in range(len(posts))]
+    
     return posts
 
 def close_db(e=None):
     db =  g.pop("db",None)
-   
     if db is not None:
         db.close()
 
@@ -27,7 +32,8 @@ def close_db(e=None):
 def init_db():
     db = get_db()
     db.cursor().execute("set time zone 'asia/tokyo'")
-    db.cursor().execute("CREATE TABLE IF NOT EXISTS text(id SERIAL PRIMARY KEY ,str TEXT, time TIMESTAMP(0) with time zone DEFAULT CURRENT_TIMESTAMP);")
+    db.cursor().execute("CREATE TABLE IF NOT EXISTS text(id SERIAL PRIMARY KEY ,str TEXT, time TIMESTAMP(0) dafault current_timestamp);")
+    #　メモ：with time zone default current_timestamp
     db.commit()
     print("init!!")
 
@@ -39,7 +45,7 @@ def clean_db():
     db = get_db()
 
     print("""
-    1:Delete 2:Truncate  3:Dropb 4:Cancel
+    1:Delete 2:Truncate  3:Drop 4:Cancel
     """)
 
     clean_command = int(input())

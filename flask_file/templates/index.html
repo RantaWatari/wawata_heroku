@@ -2,14 +2,14 @@
 {% block content %}
 
 {% if select == "insert"%}
-    insert 
+    INSERT 
     <form action="/" method="post">
         <input type="text" name="insert_text" required>
         <input type="hidden" name="sql_cmd" value="insert">
         <input type="submit">
     </form>
 {% elif select == "update"%}
-    update
+    UPDATE
     <form action="/" method="post">
         {% for post in posts%}
             <input name="update_texts" value="{{post[1]}}" required><br>
@@ -19,11 +19,10 @@
         <input type="submit">
     </form>
 {% elif select == "delete"%}
-    delete
+    DELETE
     <form action="/" method="post">
         {% for post in posts%}
-            <input type="checkbox" name="delete_id" value="{{post[0]}}">
-            {{post[1]}}<br>
+            <input type="checkbox" name="delete_id" value="{{post[0]}}">{{post[1]}}<br>
         {% endfor %}
         <input type="hidden" name="sql_cmd" value="delete">
         <input type="submit">
@@ -36,7 +35,7 @@
     <button type="submit" name="select" value="delete">削除</button>
 </form>
 {% endif %}
-<a href="/">return /</a>
+<a href="/">HOME/</a>
 <br><br>
 
 ##STORED DATE## <br>
